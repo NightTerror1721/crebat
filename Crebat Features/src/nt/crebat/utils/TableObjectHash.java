@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nt.crebat;
+package nt.crebat.utils;
 
-import nt.crebat.utils.Resource;
+import nt.ps.lang.PSUserdata;
 
 /**
  *
  * @author Asus
  */
-public final class Main
+public class TableObjectHash extends PSUserdata
 {
-    public static void main(String[] args)
-    {
-        Resource.CONFIG.getClass();
-    }
+    
 }
