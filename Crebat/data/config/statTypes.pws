@@ -1,0 +1,16 @@
+const var Proto = extends(Utils.ObjectTable) const {
+	constructor: function(tag, object) {
+		super(object.id, tag);
+		
+		self.statName = object.statName;
+		
+		Object.freeze(self);
+	},
+	
+	toString: function() { return self.statName; },
+	
+	getStatName: function() { return self.statName; }
+};
+
+const var raw = readPson("config", "statTypes");
+createGlobalValue("StatType", Utils.createNamedObjectTableContainer(raw, Proto));

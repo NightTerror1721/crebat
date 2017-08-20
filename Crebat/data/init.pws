@@ -1,4 +1,8 @@
 import(Resource.scripts.."/utils.pws");
+Utils.initBasicConfig();
+
+IO.print(StatType);
+IO.print(Nature);
 
 function importElementalTypes()
 {

@@ -21,7 +21,7 @@ const var Proto = extends(Utils.ObjectTable) const {
 		Object.freeze(self);
 	},
 	
-	toString: function() { return self.name; },
+	//toString: function() { return self.name; },
 	
 	computeDefenseEffectivity: function(type) {
 		if(typeof(type) === "number")

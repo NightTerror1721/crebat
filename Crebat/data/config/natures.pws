@@ -1,0 +1,19 @@
+const var Proto = extends(Utils.ObjectTable) const {
+	constructor: function(name, object) {
+		super(object.id, name);
+		
+		self.increase = StatType[Number.int(object.increase)];
+		self.decrease = StatType[Number.int(object.decrease)];
+		
+		Object.freeze(self);
+	},
+	
+	getModifierValue: function(statType) {
+		if(self.increase === self.decrease)
+			return 1f;
+		return statType === self.decrease ? 0.9f : statType === self.increase ? 1.1f : 1f;
+	}
+};
+
+const var raw = readPson("config", "natures");
+createGlobalValue("Nature", Utils.createNamedObjectTableContainer(raw, Proto));

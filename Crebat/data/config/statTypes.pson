@@ -1,0 +1,29 @@
+hp: {
+	id: 0,
+	statName: "PS"
+},
+
+attack: {
+	id: 1,
+	statName: "Ataque"
+},
+
+defense: {
+	id: 2,
+	statName: "Defensa"
+},
+
+sp_attack: {
+	id: 3,
+	statName: "Ataque Especial"
+},
+
+sp_defense: {
+	id: 4,
+	statName: "Defensa Especial"
+},
+
+speed: {
+	id: 5,
+	statName: "Velocidad"
+}

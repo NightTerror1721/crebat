@@ -1,5 +1,11 @@
 const var Utils = createGlobalValue("Utils", {});
 
+Utils.initBasicConfig = function()
+{
+	require("config", "statTypes");
+	require("config", "natures");
+};
+
 createGlobalValue("require", function(resource, scriptName)
 {
 	var res = Object.getProperty(Resource, resource);
@@ -52,7 +58,12 @@ Utils.ObjectTable = const {
 		
 		Object.freezeProperty(self, "id");
 		Object.freezeProperty(self, "name");
-	}
+	},
+	
+	equals: function(other) { return self.id === other.id; },
+	notEquals: function(other) { return self.id !== other.id; },
+	
+	toString: function() { return !(self.name.length) ? String(self.id) : self.name; }
 };
 
 createGlobalValue("Color", const {
@@ -105,6 +116,7 @@ createGlobalValue("Color", const {
 	
 	toString: function() { "["..self.r..", "..self.g..", "..self.b.."]"; }
 });
+
 
 
 Object.freeze(Utils);
