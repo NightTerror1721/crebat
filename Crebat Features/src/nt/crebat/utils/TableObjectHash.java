@@ -10,8 +10,9 @@ import nt.ps.lang.PSUserdata;
 /**
  *
  * @author Asus
+ * @param <TO>
  */
-public class TableObjectHash extends PSUserdata
+public final class TableObjectHash<TO extends TableObject> extends PSUserdata
 {
     
 }

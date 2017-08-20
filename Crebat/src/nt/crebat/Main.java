@@ -5,7 +5,8 @@
  */
 package nt.crebat;
 
-import nt.crebat.utils.Resource;
+import java.io.IOException;
+import nt.crebat.utils.ScriptSystem;
 
 /**
  *
@@ -13,8 +14,8 @@ import nt.crebat.utils.Resource;
  */
 public final class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
-        Resource.CONFIG.getClass();
+        ScriptSystem.initScripts("BPS");
     }
 }

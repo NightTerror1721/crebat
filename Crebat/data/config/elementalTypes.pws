@@ -1,0 +1,42 @@
+const var IMMUNE = 0f;
+const var RESISTANT = 0.5f;
+const var NORMAL = 1f;
+const var WEAK = 2f;
+
+const var Proto = extends(Utils.ObjectTable) const {
+	constructor: function(name, object) {
+		super(object.id, name);
+		self.effects = new Map();
+		self.colors = new Color(object.colors);
+		self.white_font = Boolean(object.white_font);
+		
+		for(value : object.weaknesses)
+			self.effects[value] = WEAK;
+		for(value : object.strengths)
+			self.effects[value] = RESISTANT;
+		for(value : object.immunities)
+			self.effects[value] = IMMUNE;
+		self.effects = Map.immutable(self.effects);
+		
+		Object.freeze(self);
+	},
+	
+	toString: function() { return self.name; },
+	
+	computeDefenseEffectivity: function(type) {
+		if(typeof(type) === "number")
+			type = ElementalType[type];
+		return type.id in self.effects ? self.effects[type.id] : NORMAL;
+	},
+	
+	computeAttackEffectivity: function(type) { return type.computeDefenseEffectivity(self); },
+	
+	isWeakTo:      function(type) { return self.computeDefenseEffectivity(type) === WEAK; },
+	isNormalTo:    function(type) { return self.computeDefenseEffectivity(type) === NORMAL; },
+	isResistantTo: function(type) { return self.computeDefenseEffectivity(type) === RESISTANT; },
+	isImmuneTo:    function(type) { return self.computeDefenseEffectivity(type) === WEAK; }
+};
+
+
+const var raw = readPson("config", "elementalTypes");
+createGlobalValue("ElementalType", Utils.createNamedObjectTableContainer(raw, Proto));

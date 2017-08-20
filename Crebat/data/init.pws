@@ -1,0 +1,15 @@
+import(Resource.scripts.."/utils.pws");
+
+function importElementalTypes()
+{
+	require("config", "elementalTypes");
+	IO.print(ElementalType);
+	IO.print(ElementalType[0].isWeakTo(1));
+}
+
+
+importElementalTypes();
+
+IO.print("hello world");
+IO.print(__APP__);
+IO.print(Resource());

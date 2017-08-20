@@ -1,0 +1,163 @@
+normal: {
+	id: 0,
+	immunities: [ 4 ],
+	strengths:  [ ],
+	weaknesses: [ 1 ],
+	colors:     [ 207, 140, 85 ]
+},
+
+lucha: {
+	id: 1,
+	immunities: [ ],
+	strengths:  [ 3 ],
+	weaknesses: [ 2 ],
+	colors:     [ 210, 63, 0 ]
+},
+
+psíquico: {
+	id: 2,
+	immunities: [ ],
+	strengths:  [ 1, 2, 13, 18 ],
+	weaknesses: [ 3, 4, 15, 17 ],
+	colors:     [ 255, 58, 117 ]
+},
+
+siniestro: {
+	id: 3,
+	immunities: [ 2 ],
+	strengths:  [ 3, 4, 13 ],
+	weaknesses: [ 1, 10 ],
+	colors:     [ 17, 0, 43 ],
+	white_font: true
+},
+
+fantasma: {
+	id: 4,
+	immunities: [ 0, 1 ],
+	strengths:  [ 13 ],
+	weaknesses: [ 3, 4, 16, 17, 18 ],
+	colors:     [ 128, 0, 192 ],
+	white_font: true
+},
+
+fuego: {
+	id: 5,
+	immunities: [ ],
+	strengths:  [ 5, 6, 10 ],
+	weaknesses: [ 7, 8, 9, 15, 17, 18 ],
+	colors:     [ 250, 0, 0 ]
+},
+
+hielo: {
+	id: 6,
+	immunities: [ ],
+	strengths:  [ 6, 10 ],
+	weaknesses: [ 1, 5, 9, 12, 18 ],
+	colors:     [ 0, 196, 255 ]
+},
+
+agua: {
+	id: 7,
+	immunities: [ ],
+	strengths:  [ 5, 6, 7, 12 ],
+	weaknesses: [ 10, 11, 16 ],
+	colors:     [ 0, 120, 255 ]
+},
+
+tierra: {
+	id: 8,
+	immunities: [ 11 ],
+	strengths:  [ 9 ],
+	weaknesses: [ 6, 7, 10 ],
+	colors:     [ 188, 91, 34 ]
+},
+
+roca: {
+	id: 9,
+	immunities: [ ],
+	strengths:  [ 0, 5 ],
+	weaknesses: [ 1, 7, 8, 10, 12 ],
+	colors:     [ 112, 41, 0 ],
+	white_font: true
+},
+
+naturaleza: {
+	id: 10,
+	immunities: [ ],
+	strengths:  [ 7, 8, 10, 11 ],
+	weaknesses: [ 5, 6, 13, 15, 17 ],
+	colors:     [ 0, 225, 0 ]
+},
+
+eléctrico: {
+	id: 11,
+	immunities: [ ],
+	strengths:  [ 11 ],
+	weaknesses: [ 8, 17, 18 ],
+	colors:     [ 250, 250, 0 ]
+},
+
+acero: {
+	id: 12,
+	immunities: [ 13 ],
+	strengths:  [ 0, 2, 3, 6, 7, 9, 10, 12, 14 ],
+	weaknesses: [ 1, 5, 8, 11 ],
+	colors:     [ 207, 140, 85 ]
+},
+
+veneno: {
+	id: 13,
+	immunities: [  ],
+	strengths:  [ 3, 10, 13 ],
+	weaknesses: [ 2, 8 ],
+	colors:     [ 174, 0, 133 ]
+},
+
+dragón: {
+	id: 14,
+	immunities: [ ],
+	strengths:  [ 5, 7, 10, 11, 18 ],
+	weaknesses: [ 6, 14 ],
+	colors:     [ 215, 0, 107 ]
+},
+
+infierno: {
+	id: 15,
+	immunities: [ 5, 15 ],
+	strengths:  [ 6, 10, 13 ],
+	weaknesses: [ 16 ],
+	colors:     [ 118, 0, 0 ]
+},
+
+celeste: {
+	id: 16,
+	immunities: [ 7, 16 ],
+	strengths:  [ 6, 10, 11 ],
+	weaknesses: [ 15 ],
+	colors:     [ 110, 255, 255 ]
+},
+
+energia: {
+	id: 17,
+	immunities: [ 5, 11, 17, 18 ],
+	strengths:  [ 2, 4, 10 ],
+	weaknesses: [ 6 ],
+	colors:     [ 255, 255, 190 ]
+},
+
+mágico: {
+	id: 18,
+	immunities: [ 17 ],
+	strengths:  [ 4, 5, 6, 11 ],
+	weaknesses: [ 2, 14 ],
+	colors:     [ 255, 0, 255 ],
+	white_font: true
+},
+
+desconocido: {
+	id: 19,
+	immunities: [ ],
+	strengths:  [ ],
+	weaknesses: [ ],
+	colors:     [ 220, 220, 220 ]
+}

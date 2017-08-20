@@ -1,0 +1,110 @@
+const var Utils = createGlobalValue("Utils", {});
+
+createGlobalValue("require", function(resource, scriptName)
+{
+	var res = Object.getProperty(Resource, resource);
+	if(typeof(res) === "undefined")
+		return {};
+	return import(res.."/"..scriptName..".pws");
+});
+
+createGlobalValue("readPson", function(resource, psonName)
+{
+	var res = Object.getProperty(Resource, resource);
+	if(typeof(res) === "undefined")
+		return {};
+	return PSON.read(res.."/"..psonName..".pson");
+});
+
+Utils.createNamedObjectTableContainer = function(rawObject, Proto)
+{
+	var rawList = new Array(Object.getPropertyCount(rawObject));
+	for(name, value : Object.properties(rawObject))
+	{
+		var object = Object.freeze(new Proto(name, value));
+		Object.setProperty(rawObject, name, object);
+		rawList[object.id] = object;
+	}
+
+	rawList = new Tuple(rawList);
+	rawObject.__call__ = function() { return rawList; };
+	rawObject.__get__ = function(key) {
+		switch(typeof(key))
+		{
+			default: throw "Invalid key type";
+			case "string": return Object.getProperty(rawObject, key);
+			case "number": return rawList[key];
+		}
+	};
+	rawObject.toString = function() { return String(rawList); };
+	
+	return Object.freeze(rawObject);
+};
+
+Utils.ObjectTable = const {
+	constructor: function(id, name = "") {
+		if(typeof(id) !== "number")
+			throw "Invalid id";
+		self.id = id;
+		if(typeof(name) !== "string")
+			throw "Invalid name";
+		self.name = name;
+		
+		Object.freezeProperty(self, "id");
+		Object.freezeProperty(self, "name");
+	}
+};
+
+createGlobalValue("Color", const {
+	constructor: function(r, g = null, b = null) {
+		if(g === null || b === null)
+		{
+			switch(typeof(r))
+			{
+				default:
+				case "array":
+				case "tuple":
+					self.r = Number.int(r[0]);
+					self.g = Number.int(r[1]);
+					self.b = Number.int(r[2]);
+					break;
+				case "object":
+					if(r instanceof Color)
+					{
+						self.r = Number.int(r.r);
+						self.g = Number.int(r.g);
+						self.b = Number.int(r.b);
+					}
+					else throw "Invalid color to copy";
+					break;
+			}
+		}
+		else
+		{
+			self.r = Number.int(r);
+			self.g = Number.int(g);
+			self.b = Number.int(b);
+		}
+		
+		Object.freezeProperty(self, "r");
+		Object.freezeProperty(self, "g");
+		Object.freezeProperty(self, "b");
+	},
+	
+	red:   function() { return self.r; },
+	green: function() { return self.g; },
+	blue:  function() { return self.b; },
+	
+	equals: function(other) {
+		return other instanceof Color && self.r === other.r && self.g === other.g && self.b === other.b;
+	},
+	
+	notEquals: function(other) { return !self.equals(other); },
+	
+	toArray: function() { return [self.r, self.g, self.b]; },
+	
+	toString: function() { "["..self.r..", "..self.g..", "..self.b.."]"; }
+});
+
+
+Object.freeze(Utils);

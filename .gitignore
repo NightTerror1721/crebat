@@ -24,3 +24,5 @@ hs_err_pid*
 /Crebat Features/nbproject/private/
 /Crebat/build/
 /Crebat Features/build/
+/Crebat/dist/
+/Crebat Features/dist/
