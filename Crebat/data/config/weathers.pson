@@ -1,0 +1,41 @@
+Normal: {
+	id: 0,
+	strengthen: [ ],
+	weaken: [ ]
+},
+
+Lluvia: {
+	id: 1,
+	strengthen: [ 7 ],
+	weaken: [ 5 ]
+},
+
+Soleado: {
+	id: 2,
+	strengthen: [ 5 ],
+	weaken: [ 7 ]
+},
+
+"Tormenta de Arena": {
+	id: 3,
+	strengthen: [ 8, 9 ],
+	weaken: [ 11, 13 ]
+},
+
+Granizo: {
+	id: 4,
+	strengthen: [ 6 ],
+	weaken: [ ]
+},
+
+Neblinoso: {
+	id: 5,
+	strengthen: [ 3, 4 ],
+	weaken: [ ]
+},
+
+"Tormenta Eléctrica": {
+	id: 6,
+	strengthen: [ 11 ],
+	weaken: [ ]
+}

@@ -1,0 +1,28 @@
+const var INCREASED = 1.5f;
+const var NO_MOD = 1f;
+const var DECREASED = 0.75f;
+
+const var Proto = extends(Utils.ObjectTable) const {
+	constructor: function(name, object) {
+		super(object.id, name);
+		
+		self.effects = new Map();
+		for(value : object.strengthen)
+			self.effects[value] = INCREASED;
+		for(value : object.weaken)
+			self.effects[value] = DECREASED;
+		self.effects = Map.immutable(self.effects);
+		
+		Object.freeze(self);
+	},
+	
+	computeDamageModification: function(type) {
+		if(typeof(type) === "number")
+			type = ElementalType[type];
+		var id = type.id;
+		return id in self.effects ? self.effects[id] : NO_MOD;
+	}
+};
+
+const var raw = readPson("config", "weathers");
+createGlobalValue("Weather", Utils.createNamedObjectTableContainer(raw, Proto));

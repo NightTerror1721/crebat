@@ -2,4 +2,148 @@ Fuerte: {
 	id: 0,
 	increase: 1,
 	decrease: 1
+},
+
+Huraña: {
+	id: 1,
+	increase: 1,
+	decrease: 2
+},
+
+Firme: {
+	id: 2,
+	increase: 1,
+	decrease: 3
+},
+
+Pícara: {
+	id: 3,
+	increase: 1,
+	decrease: 4
+},
+
+Audaz: {
+	id: 4,
+	increase: 1,
+	decrease: 5
+},
+
+Osada: {
+	id: 5,
+	increase: 2,
+	decrease: 1
+},
+
+Dócil: {
+	id: 6,
+	increase: 2,
+	decrease: 2
+},
+
+Agitada: {
+	id: 7,
+	increase: 2,
+	decrease: 3
+},
+
+Floja: {
+	id: 8,
+	increase: 2,
+	decrease: 4
+},
+
+Plácida: {
+	id: 9,
+	increase: 2,
+	decrease: 5
+},
+
+Modesta: {
+	id: 10,
+	increase: 3,
+	decrease: 1
+},
+
+Afable: {
+	id: 11,
+	increase: 3,
+	decrease: 2
+},
+
+Tímida: {
+	id: 12,
+	increase: 3,
+	decrease: 3
+},
+
+Alocada: {
+	id: 13,
+	increase: 3,
+	decrease: 4
+},
+
+Mansa: {
+	id: 14,
+	increase: 3,
+	decrease: 5
+},
+
+Serena: {
+	id: 15,
+	increase: 4,
+	decrease: 1
+},
+
+Amable: {
+	id: 16,
+	increase: 4,
+	decrease: 2
+},
+
+Cauta: {
+	id: 17,
+	increase: 4,
+	decrease: 3
+},
+
+Rara: {
+	id: 18,
+	increase: 4,
+	decrease: 4
+},
+
+Grosera: {
+	id: 19,
+	increase: 4,
+	decrease: 5
+},
+
+Miedosa: {
+	id: 20,
+	increase: 5,
+	decrease: 1
+},
+
+Activa: {
+	id: 21,
+	increase: 5,
+	decrease: 2
+},
+
+Alegre: {
+	id: 22,
+	increase: 5,
+	decrease: 3
+},
+
+Ingenua: {
+	id: 23,
+	increase: 5,
+	decrease: 4
+},
+
+Seria: {
+	id: 24,
+	increase: 5,
+	decrease: 5
 }

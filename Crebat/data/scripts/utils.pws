@@ -1,9 +1,12 @@
 const var Utils = createGlobalValue("Utils", {});
+const var int = Number.int;
 
 Utils.initBasicConfig = function()
 {
 	require("config", "statTypes");
 	require("config", "natures");
+	require("config", "growths");
+	require("config", "weathers");
 };
 
 createGlobalValue("require", function(resource, scriptName)
@@ -37,7 +40,7 @@ Utils.createNamedObjectTableContainer = function(rawObject, Proto)
 	rawObject.__get__ = function(key) {
 		switch(typeof(key))
 		{
-			default: throw "Invalid key type";
+			default: throw "Invalid key type: "..key;
 			case "string": return Object.getProperty(rawObject, key);
 			case "number": return rawList[key];
 		}
@@ -50,10 +53,10 @@ Utils.createNamedObjectTableContainer = function(rawObject, Proto)
 Utils.ObjectTable = const {
 	constructor: function(id, name = "") {
 		if(typeof(id) !== "number")
-			throw "Invalid id";
+			throw "Invalid id: "..id;
 		self.id = id;
 		if(typeof(name) !== "string")
-			throw "Invalid name";
+			throw "Invalid name: "..name;
 		self.name = name;
 		
 		Object.freezeProperty(self, "id");
@@ -75,16 +78,16 @@ createGlobalValue("Color", const {
 				default:
 				case "array":
 				case "tuple":
-					self.r = Number.int(r[0]);
-					self.g = Number.int(r[1]);
-					self.b = Number.int(r[2]);
+					self.r = int(r[0]);
+					self.g = int(r[1]);
+					self.b = int(r[2]);
 					break;
 				case "object":
 					if(r instanceof Color)
 					{
-						self.r = Number.int(r.r);
-						self.g = Number.int(r.g);
-						self.b = Number.int(r.b);
+						self.r = int(r.r);
+						self.g = int(r.g);
+						self.b = int(r.b);
 					}
 					else throw "Invalid color to copy";
 					break;
@@ -92,9 +95,9 @@ createGlobalValue("Color", const {
 		}
 		else
 		{
-			self.r = Number.int(r);
-			self.g = Number.int(g);
-			self.b = Number.int(b);
+			self.r = int(r);
+			self.g = int(g);
+			self.b = int(b);
 		}
 		
 		Object.freezeProperty(self, "r");

@@ -1,0 +1,23 @@
+﻿Normal: {
+	id: 0
+},
+
+Rápido: {
+	id: 1
+},
+
+Lento: {
+	id: 2
+},
+
+Parabólico: {
+	id: 3
+},
+
+Errático: {
+	id: 4
+},
+
+Fluctuante: {
+	id: 5
+}

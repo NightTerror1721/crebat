@@ -3,6 +3,8 @@ Utils.initBasicConfig();
 
 IO.print(StatType);
 IO.print(Nature);
+IO.print(Growth);
+IO.print(Weather);
 
 function importElementalTypes()
 {
@@ -10,6 +12,8 @@ function importElementalTypes()
 	IO.print(ElementalType);
 	IO.print(ElementalType[0].isWeakTo(1));
 }
+
+IO.print(Growth[5].computeExperienceToLevel(50));
 
 
 importElementalTypes();

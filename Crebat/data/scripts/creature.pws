@@ -1,0 +1,32 @@
+const var int = Number.int;
+const var positiveOnly = function(value) { return value < 1 ? 1 : value; }
+
+const var Stat = const {
+	constructor: function(statType) {
+		self.type = StatType[statType];
+		self.value = 1;
+		self.base = 1;
+		self.genetic = 0;
+		self.ab_points = 0;
+		self.modif = 0;
+		
+		Object.freezeProperty(self, "type");
+	},
+	
+	getName: function() { return self.type.name; },
+	
+	setValue: function(value) { self.value = positiveOnly(int(value)); },
+	getValue: function() { return self.value; },
+	
+	setBase: function(value) { self.base = positiveOnly(int(value)); }
+	getBase: function() { return self.base; }
+};
+
+
+const var Creature = const {
+	constructor: function() {
+		self.nickname = "";
+		
+	}
+	
+};

@@ -64,6 +64,9 @@ public final class Resource
     public static final Resource DATA = new Resource(null);
     public static final Resource CONFIG = new Resource("config");
     public static final Resource SCRIPTS = new Resource("scripts");
+    public static final Resource RACES = new Resource("races");
+    public static final Resource ATTACKS = new Resource("attacks");
+    public static final Resource ITEMS = new Resource("items");
     
     
     

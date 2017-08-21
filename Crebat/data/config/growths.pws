@@ -1,0 +1,57 @@
+const var int = Number.int;
+const var pow = Math.pow;
+
+const var growthFunction = (
+	function(level) { return int(pow(level, 3)); },
+	
+	function(level) { return int(pow(level, 3) * 0.8); },
+	
+	function(level) { return int(pow(level, 3) * 1.25); },
+	
+	function(level) { return int((pow(level, 3) * 1.2) - (pow(level, 2) * 15) + (level * 100) - 140); },
+	
+	function(level) {
+		if(level <= 50)
+			return int((pow(level, 3) * (100 - level)) / 50);
+		else if(51 <= level && level <= 68)
+			return int((pow(level, 3) * (150 - level)) / 100);
+		else if(69 <= level && level <= 98) {
+			var iA = level & 3;
+			var A;
+			switch(iA)
+			{
+				default: A = 0; break;
+				case 1: A = 0.008;
+				case 2: A = 0.014;
+			}
+			return int(pow(level, 3) * (1.274 - level / 150 - A));
+		}
+		else if(99 <= level && level < 100)
+			return int((pow(level, 3) * (160 - level)) / 100);
+		else return int(pow(level, 3) * 0.6);
+	},
+	
+	function(level) {
+		if(level <= 15)
+			return int(pow(level, 3) * (24 + (level + 1) / 3) / 50);
+		else if(16 <= level && level <= 35)
+			return int(pow(level, 3) * (14 + level) / 50);
+		else if(level < 100)
+			return int(pow(level, 3) * (32 + (level / 2)) / 50);
+		else return int(pow(level, 3) * 1.64);
+	}
+);
+
+const var Proto = extends(Utils.ObjectTable) const {
+	constructor: function(name, object) {
+		super(object.id, name);
+		Object.freeze(self);
+	},
+	
+	computeExperienceToLevel: function(level) {
+		return growthFunction[self.id](level);
+	}
+};
+
+const var raw = readPson("config", "growths");
+createGlobalValue("Growth", Utils.createNamedObjectTableContainer(raw, Proto));
