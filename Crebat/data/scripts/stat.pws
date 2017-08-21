@@ -1,0 +1,98 @@
+const var int = Number.int;
+const var float = Number.float;
+const var abs = Math.abs;
+const var MAX_GENETIC_VALUE = 31;
+const var positiveOnly = function(value) { return value < 1 ? 1 : value; }
+const var geneticRange = function(value) { return value < 0 ? 0 : value > MAX_GENETIC_VALUE ? MAX_GENETIC_VALUE : value; }
+const var getAbilityValue = function(ab_points, level) { return ab_points * level * 0.025f; }
+const var computeModification = function(modif) {
+	if(modif == 0)
+		return 1f;
+	if(modif > 0)
+		return (2f + modif) / 2f;
+	return 2f / (2f - modif);
+};
+
+global Stat = const {
+	constructor: function(statType) {
+		self.type = StatType[statType];
+		self.value = 1;
+		self.base = 1;
+		self.genetic = 0;
+		self.ab_points = 0;
+		self.modif = 0;
+		
+		Object.freezeProperty(self, "type");
+	},
+	
+	getName: function() { return self.type.name; },
+	
+	setValue: function(value) { self.value = positiveOnly(int(value)); },
+	getValue: function() { return self.value; },
+	
+	setBase: function(value) { self.base = positiveOnly(int(value)); },
+	getBase: function() { return self.base; },
+	
+	setGenetic: function(value) { self.genetic = geneticRange(int(value)); },
+	getGenetic: function() { return self.genetic; },
+	
+	giveAbilityPoints: function(amount) { self.ab_points += abs(int(amount)); },
+	getAbilityPoints: function() { return self.ab_points; },
+	
+	update: function(level, nature) {
+		var value = 50 + (level * 0.1f * ((self.base * 20) + self.genetic)) + getAbilityValue(self.ab_points, level);
+		value *= nature.getModifierValue(self.type);
+		self.value = value < 1 ? 1 : value > 9999 ? 9999 : value;
+	},
+	
+	increase: function(amount) {
+		amount = abs(amount);
+		if(self.modif + amount > 6) {
+			self.modif = 6;
+			return false;
+		}
+		self.modif += amount;
+		return true;
+	},
+	
+	decrease: function(amount) {
+		amount = abs(amount);
+		if(self.modif - amount < -6) {
+			self.modif = -6;
+			return false;
+		}
+		self.modif -= amount;
+		return true;
+	},
+	
+	resetModifications: function() { self.modif = 0; },
+	
+	getModificationFactor: function() { return computeModification(self.modif); },
+	
+	getModificationValue: function() { return self.modif; },
+	
+	getStatValue: function() { return int(value * computeModification(self.modif)); },
+	
+	read: function(object) {
+		var stat = new Stat(object.statType);
+		stat.value = int(object.value);
+		stat.base = int(object.base);
+		stat.genetic = int(object.genetic);
+		stat.ab_points = int(object.ab_points);
+		stat.modif = float(object.modif);
+		return stat;
+	},
+	
+	write: function(stat = null)
+	{
+		stat = stat === null ? self : stat;
+		return {
+			statType: stat.statType,
+			value: stat.value,
+			base: stat.base,
+			genetic: stat.genetic,
+			ab_points: stat.ab_points,
+			stat.modif: stat.modif
+		};
+	}
+};

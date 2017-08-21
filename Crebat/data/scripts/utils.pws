@@ -17,6 +17,15 @@ createGlobalValue("require", function(resource, scriptName)
 	return import(res.."/"..scriptName..".pws");
 });
 
+createGlobalValue("requireFrom", function(resource, scriptName, select...)
+{
+	var res = require(resource, scriptName);
+	var list = new Array(select.length);
+	for(sel, it : select)
+		list[it] = Object.getProperty(res, sel);
+	return list.expand();
+});
+
 createGlobalValue("readPson", function(resource, psonName)
 {
 	var res = Object.getProperty(Resource, resource);
