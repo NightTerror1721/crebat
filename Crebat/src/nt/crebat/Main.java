@@ -7,6 +7,7 @@ package nt.crebat;
 
 import java.io.IOException;
 import nt.crebat.utils.ScriptSystem;
+import nt.ps.compiler.exception.CompilerError;
 
 /**
  *
@@ -16,6 +17,7 @@ public final class Main
 {
     public static void main(String[] args) throws IOException
     {
+        CompilerError.setDebugMode(true);
         ScriptSystem.initScripts("BPS");
     }
 }

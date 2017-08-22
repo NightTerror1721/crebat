@@ -2,9 +2,9 @@ const var int = Number.int;
 const var float = Number.float;
 const var abs = Math.abs;
 const var MAX_GENETIC_VALUE = 31;
-const var positiveOnly = function(value) { return value < 1 ? 1 : value; }
-const var geneticRange = function(value) { return value < 0 ? 0 : value > MAX_GENETIC_VALUE ? MAX_GENETIC_VALUE : value; }
-const var getAbilityValue = function(ab_points, level) { return ab_points * level * 0.025f; }
+const var positiveOnly = function(value) { return value < 1 ? 1 : value; };
+const var geneticRange = function(value) { return value < 0 ? 0 : value > MAX_GENETIC_VALUE ? MAX_GENETIC_VALUE : value; };
+const var getAbilityValue = function(ab_points, level) { return ab_points * level * 0.025f; };
 const var computeModification = function(modif) {
 	if(modif == 0)
 		return 1f;
@@ -73,7 +73,7 @@ global Stat = const {
 	
 	getStatValue: function() { return int(value * computeModification(self.modif)); },
 	
-	read: function(object) {
+	decode: function(object) {
 		var stat = new Stat(object.statType);
 		stat.value = int(object.value);
 		stat.base = int(object.base);
@@ -83,7 +83,7 @@ global Stat = const {
 		return stat;
 	},
 	
-	write: function(stat = null)
+	encode: function(stat = null)
 	{
 		stat = stat === null ? self : stat;
 		return {
@@ -94,5 +94,59 @@ global Stat = const {
 			ab_points: stat.ab_points,
 			stat.modif: stat.modif
 		};
+	}
+};
+
+global HPStat = extends(Stat) const {
+	constructor: function() {
+		super(StatType.hp);
+		self.current = super.value;
+	},
+	
+	setMaxHealthPoints: Stat.setValue,
+	getMaxHealthPoints: Stat.getStatValue,
+	
+	setCurrentHealthPoints: function(points) {
+		var max = self.getMaxHealthPoints();
+		self.current = int(points < 0 ? 0 : points > max ? max : points);
+	},
+	getCurrentHealthPoints: function() { return self.current; },
+	
+	damage: function(points) { self.setCurrentHealthPoints(self.current - abs(points)); },
+	
+	damagePercentage: function(percentage) {
+		if(percentage.isInteger())
+			percentage /= 100;
+		percentage = percentage < 0 ? 0 : percentage > 1d ? 1d : percentage;
+		self.damage(self.getMaxHealthPoints() * percentage);
+	},
+	
+	kill: function() { self.damagePercentage(1f); },
+	
+	heal: function(points) { self.setCurrentHealthPoints(self.current + abs(points)); },
+	
+	healPercentage: function(percentage) {
+		if(percentage.isInteger())
+			percentage /= 100;
+		percentage = percentage < 0 ? 0 : percentage > 1d ? 1d : percentage;
+		self.heal(self.getMaxHealthPoints() * percentage);
+	},
+	
+	decode: function(object) {
+		var stat = new HPStat(object.statType);
+		stat.value = int(object.value);
+		stat.base = int(object.base);
+		stat.genetic = int(object.genetic);
+		stat.ab_points = int(object.ab_points);
+		stat.modif = float(object.modif);
+		stat.current = object.current;
+		return stat;
+	},
+	
+	encode: function(stat = null) {
+		stat = stat === null ? self : stat;
+		var obj = Stat.encode(stat);
+		obj.current = stat.current;
+		return obj;
 	}
 };

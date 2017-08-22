@@ -18,6 +18,8 @@ IO.print(Growth[5].computeExperienceToLevel(50));
 
 importElementalTypes();
 
+require("scripts", "creature");
+
 IO.print("hello world");
 IO.print(__APP__);
 IO.print(Resource());
