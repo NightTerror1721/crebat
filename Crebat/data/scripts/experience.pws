@@ -1,0 +1,50 @@
+const var int = Number.int;
+const var abs = Math.abs;
+const var MAX_LEVEL = 100;
+
+
+global Experience = const {
+	constructor: function() {
+		self.level = 1;
+		self.max_exp = 0;
+		self.exp = 0;
+		self.growth = null;
+	},
+	
+	reviseExp: function() {
+		if(self.exp < self.max_exp || self.level >= MAX_LEVEL)
+			return;
+        self.level += 1;
+        self.max_exp = self.growth.computeExperienceToLevel(self.level + 1);
+        if(self.level >= MAX_LEVEL)
+        {
+            self.exp = self.max_exp;
+            return;
+        }
+        self.reviseExp();
+	},
+	
+	setGrowth: function(growthId) { self.growth = Growth[growthId]; },
+	getGrowth: function() { return self.growth; },
+	
+	setExpPoints: function(points) {
+		points = abs(points);
+		self.exp = int(points > self.max_exp ? self.max_exp - 1 : points);
+	},
+	
+	addExpPoints: function(points) {
+		self.exp += int(abs(points));
+		self.reviseExp();
+	},
+	
+	getExpPoints: function() { return self.exp; },
+	
+	getMaxExpPoints: function() { return self.max_exp; },
+	
+	setLevel: function(level) {
+		self.level = level < 1 ? 1 : level > MAX_LEVEL ? MAX_LEVEL : level;
+        self.max_exp = self.level >= MAX_LEVEL ? self.growth.computeExperienceToLevel(MAX_LEVEL) : self.growth.computeExperienceToLevel(self.level + 1);
+        self.exp = self.growth.computeExperienceToLevel(self.level);
+        self.reviseExp();
+	}
+};
